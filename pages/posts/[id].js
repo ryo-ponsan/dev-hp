@@ -9,7 +9,8 @@ export default function Post({post}){
         return <div>Loading...</div>
     }
 
-    return <Layout title={post.title}>
+    return (
+    <Layout title={post.title}>
         <p className="m-4">
             {"ID : "}
             {post.id}
@@ -25,7 +26,8 @@ export default function Post({post}){
                 <span>Back to blog-page</span>
             </div>
         </Link>
-    </Layout>;
+    </Layout>
+    );
 }
 
 // ビルド時にAPI側のエンドポイントへアクセスし、必要なIDの一覧を取得
@@ -42,7 +44,7 @@ export async function getStaticPaths(){
 
 export async function getStaticProps({params}){
     // 特定のブログデータの取得
-    const{post:post} = await getPostData(params.id);
+    const post = await getPostData(params.id);
     return {
         props:{
             post, 
